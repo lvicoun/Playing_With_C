@@ -1,16 +1,17 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-	echo "Please enter a filename as an argument" 
-fi
+# TODO add getopts function!
 
-if [ -e $1 ]; then
-	#DATE=$(`date +%D`)
-	FILENAME="$1 + `date +%D`"
-	
-	tar -cf $FILENAME
-	echo "The archive has been created in $FILENAME"
+if [ $# -eq 0 ]; then
+	echo "Please enter filenames as argument followed by the -T option followed by a tar target filename" 
 else
-	echo "The entered filename does not exist."
+	#DATE=$(`date +%D`)
+	
+	FILENAME="$(`$1`)-`date +%D`"
+	
+	
+	tar -cf $FILENAME $(`[2-`$#`]+`)
+	echo "The archive has been created in $FILENAME"
+
 	exit
 fi 
